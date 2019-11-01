@@ -3,16 +3,22 @@ local dirs = {{x=1,y=0,z=0},{x=0,y=1,z=0},{x=-1,y=0,z=0},{x=0,y=-1,z=0},{x=0,y=0
 --  --  --  --  --  --  MUD TILES --  --  --  --  --  --  
 for k,v in pairs(nc_stuccol.patterns)do
   minetest.register_node("nc_stucco:stucco_"..v.."_clay",{
-    description = "Stucco with "..v.." Pattern",
+    description = "Wet Stucco with "..v.." Pattern",
     tiles = {"canvas1a.png^"..v..".png"},
     groups = {workable = 1, crumbly = 1},
 })
+  minetest.register_node("nc_stucco:stucco_"..v.."_clay_dry",{
+    description = "Dry Stucco with "..v.." Pattern",
+    tiles = {"canvas1b.png^"..v..".png"},
+    groups = {crumbly = 2},
+})
 end
+
 for _,v in pairs(nc_stuccol.curing.stages) do
 minetest.register_node("nc_stucco:stucco"..v,{
   description = v.." Stucco",
   tiles = {"canvas1a.png^"..v..".png"},
-  groups = {workable = 1, crumbly = 1},
+  groups = { crumbly = 1},
   on_construct = function(pos)
   local noden = minetest.get_node(pos).name
   if(noden == "nc_stucco:stuccopowdered")then

@@ -45,12 +45,13 @@ end
 
 end
 })
---[[minetest.register_abm({
-  label = "Straggler powder",
-  nodenames = {thismod .. ":stuccopowdered"},
-  interval = 1.5,
-  chance = 1,
+minetest.register_abm({
+  label = "Worked Clay Drying",
+  nodenames = {"group:workable"},
+  interval = 8.5,
+  chance = 0.5,
   action = function(pos)
-    minetest.set_node(pos,{name="nc_stucco:stuccosodden"})
+  local noden = minetest.get_node(pos).name
+  minetest.set_node(pos,{name = noden.."_dry"})
   end
-  })]]
+})

@@ -37,7 +37,21 @@ nodecore.register_craft({
         }
     }
 })
-for n=1,#nc_stuccol.theseNodes, 1 do
+
+nodecore.register_craft({
+    label = "nc_stucco;craft_inscrip",
+    action = "pummel",
+    priority = 2,
+    toolgroups = {thumpy = 1},
+    nodes = {
+        {
+            match = "nc_stucco:stuccodamp" or "nc_stucco:stuccomoist",
+            replace = "nc_stucco:stucco_gkey_clay"
+        },
+    }
+})
+
+for n=1,#nc_stuccol.theseNodes_clay, 1 do
 nodecore.register_craft({
     label = "nc_stucco;craft_"..nc_stuccol.patterns[n],
     action = "pummel",
@@ -45,8 +59,8 @@ nodecore.register_craft({
     toolgroups = {thumpy = 1},
     nodes = {
         {
-            match = nc_stuccol.theseNodes[n],
-            replace = nc_stuccol.theseNodes[n+1] or nc_stuccol.theseNodes[1]
+            match = nc_stuccol.theseNodes_clay[n],
+            replace = nc_stuccol.theseNodes_clay[n+1] or nc_stuccol.theseNodes_clay[1]
         },
     }
 })

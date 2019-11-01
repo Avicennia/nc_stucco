@@ -3,9 +3,9 @@ local modpath = minetest.get_modpath(thismod)
 nc_stuccol = {curing = {stages = {"sodden","moist","damp","dry","powdered"}},
 patterns = {"gkey","beetle","bindy","crossy","corinth","hashy","icebox","vermi","bricky",
 "hexy","brexy","barry","ridgey","lamby","doric","starry","targey"},
-theseNodes = {}}
+theseNodes_clay = {}}
 for k,v in ipairs(nc_stuccol.patterns)do
-    nc_stuccol.theseNodes[k] = "nc_stucco:stucco" .. v
+    nc_stuccol.theseNodes_clay[k] = "nc_stucco:stucco_" .. v .. "_clay"
 end
 rawset(_G, thismod, nc_stuccol)
 
@@ -13,3 +13,4 @@ rawset(_G, thismod, nc_stuccol)
 dofile(modpath .. "/nodes.lua")
 dofile(modpath .. "/curing.lua")
 dofile(modpath .. "/crafting.lua")
+
