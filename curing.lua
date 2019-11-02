@@ -14,18 +14,18 @@ end
 
 
 minetest.register_abm({
-  label = "Dry Stucco Dessication",
-  nodenames = {thismod .. ":stuccosodden",thismod .. ":stuccomoist",thismod .. ":stuccodamp"},
-  interval = 12.5,
-  chance = 0.5,
+  label = "Dry Clay-Stucco Dessication",
+  nodenames = {thismod .. ":stucco_sodden_clay",thismod .. ":stucco_moist_clay",thismod .. ":stucco_damp_clay",},
+  interval = 7.5,
+  chance = 0.2,
   action = function(pos)
   local noden = minetest.get_node(pos).name
   if (waterchk(pos) == false) then
-    if(noden == thismod ..":stucco".. nc_stuccol.curing.stages[1]) then
-      minetest.set_node(pos, {name = thismod ..":stucco".. nc_stuccol.curing.stages[2]})
-    elseif(noden == thismod ..":stucco".. nc_stuccol.curing.stages[2]) then
-       minetest.set_node(pos, {name = thismod ..":stucco".. nc_stuccol.curing.stages[3]})
-    else minetest.set_node(pos, {name = thismod ..":stucco".. nc_stuccol.curing.stages[4]})
+    if(noden == thismod ..":stucco_".. nc_stuccol.curing.stages[1] .. "_clay") then
+      minetest.set_node(pos, {name = thismod ..":stucco_".. nc_stuccol.curing.stages[2] .. "_clay"})
+    elseif(noden == thismod ..":stucco_".. nc_stuccol.curing.stages[2] .. "_clay") then
+       minetest.set_node(pos, {name = thismod ..":stucco_".. nc_stuccol.curing.stages[3] .. "_clay"})
+    else minetest.set_node(pos, {name = thismod ..":stucco_".. nc_stuccol.curing.stages[4] .. "_clay"})
 
     end
   elseif(waterchk(pos)== true)then return
@@ -33,22 +33,29 @@ minetest.register_abm({
 end
 })
 minetest.register_abm({
-label = "Finishing clay",
-nodenames = {thismod .. ":stuccodamp"},
-interval = 10.5,
-chance = 0.6,
-action = function(pos)
-local noden = minetest.get_node(pos).name
-if(noden == thismod ..":stuccodamp")then
-  minetest.set_node(pos,{name = thismod ..":stuccoDry"})
-end
+  label = "Dry Granite-Stucco Dessication",
+  nodenames = {thismod .. ":stucco_sodden_granite",thismod .. ":stucco_moist_granite",thismod .. ":stucco_damp_granite",},
+  interval = 14.5,
+  chance = 0.2,
+  action = function(pos)
+  local noden = minetest.get_node(pos).name
+  if (waterchk(pos) == false) then
+    if(noden == thismod ..":stucco_".. nc_stuccol.curing.stages[1] .. "_granite") then
+      minetest.set_node(pos, {name = thismod ..":stucco_".. nc_stuccol.curing.stages[2] .. "_granite"})
+    elseif(noden == thismod ..":stucco_".. nc_stuccol.curing.stages[2] .. "_granite") then
+       minetest.set_node(pos, {name = thismod ..":stucco_".. nc_stuccol.curing.stages[3] .. "_granite"})
+    else minetest.set_node(pos, {name = thismod ..":stucco_".. nc_stuccol.curing.stages[4] .. "_granite"})
 
+    end
+  elseif(waterchk(pos)== true)then return
+  end
 end
 })
+
 minetest.register_abm({
   label = "Worked Clay Drying",
   nodenames = {"group:workable"},
-  interval = 8.5,
+  interval = 20.5,
   chance = 0.5,
   action = function(pos)
   local noden = minetest.get_node(pos).name

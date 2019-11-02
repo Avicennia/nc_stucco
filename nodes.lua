@@ -15,13 +15,13 @@ for k,v in pairs(nc_stuccol.patterns)do
 end
 
 for _,v in pairs(nc_stuccol.curing.stages) do
-minetest.register_node("nc_stucco:stucco"..v,{
+minetest.register_node("nc_stucco:stucco_"..v.."_clay",{
   description = v.." Stucco",
   tiles = {"canvas1a.png^"..v..".png"},
   groups = { crumbly = 1},
   on_construct = function(pos)
   local noden = minetest.get_node(pos).name
-  if(noden == "nc_stucco:stuccopowdered")then
+  if(noden == "nc_stucco:stucco_powdered_clay")then
     local timer =minetest.get_node_timer(pos)
     local index = math.random(0.3,1)
     timer:start(10*index)
@@ -36,17 +36,66 @@ minetest.register_node("nc_stucco:stucco"..v,{
     else end
     end
     if(ind == true)then
-      minetest.set_node(pos, {name = "nc_stucco:stucco"..nc_stuccol.curing.stages[1]})
+      minetest.set_node(pos, {name = "nc_stucco:stucco_"..nc_stuccol.curing.stages[1] .. "_clay"})
     else return end
       end
   })
 end
 
-minetest.register_node("nc_stucco:crushed_stucco",{
+minetest.register_node("nc_stucco:crushed_stucco_clay",{
 description = "Crushed Stucco",
 tiles = {"canvas1a.png^[mask:vermi.png"},
-groups = {workable = 1, crumbly = 1},
+groups = { crumbly = 1},
 on_punch = function(pos)
 end
 })
 --  --  --  --  --  --  MUD TILES --  --  --  --  --  --  
+
+
+
+for k,v in pairs(nc_stuccol.patterns)do
+  minetest.register_node("nc_stucco:stucco_"..v.."_granite",{
+    description = "Wet Stucco with "..v.." Pattern",
+    tiles = {"canvas2.png^"..v..".png^"..v..".png"},
+    groups = {workable = 1, crumbly = 1},
+})
+  minetest.register_node("nc_stucco:stucco_"..v.."_granite_dry",{
+    description = "Dry Stucco with "..v.." Pattern",
+    tiles = {"canvas2.png^"..v..".png"},
+    groups = {crumbly = 2},
+})
+end
+for _,v in pairs(nc_stuccol.curing.stages) do
+  minetest.register_node("nc_stucco:stucco_"..v.."_granite",{
+    description = v.." Stucco",
+    tiles = {"canvas2.png^"..v..".png"},
+    groups = { crumbly = 1},
+    on_construct = function(pos)
+    local noden = minetest.get_node(pos).name
+    if(noden == "nc_stucco:stucco_powdered_granite")then
+      local timer =minetest.get_node_timer(pos)
+      local index = math.random(0.3,1)
+      timer:start(10*index)
+    end
+    end,
+    on_timer = function(pos)
+    local ind = false
+    for _,v in pairs(dirs)do
+      local query = minetest.get_node(vector.add(v,pos)).name
+      if(query == "nc_terrain:water_source")then
+        ind = true
+      else end
+      end
+      if(ind == true)then
+        minetest.set_node(pos, {name = "nc_stucco:stucco_"..nc_stuccol.curing.stages[1] .. "_granite"})
+      else return end
+        end
+    })
+  end
+  minetest.register_node("nc_stucco:crushed_stucco_granite",{
+    description = "Crushed Stucco",
+    tiles = {"canvas2.png^[mask:vermi.png"},
+    groups = { crumbly = 1},
+    on_punch = function(pos)
+    end
+    })
