@@ -11,11 +11,11 @@ end
 
 
 minetest.register_abm({
-  label = "Dry Stucco Dessication",
+  label = "Powdered Stucco Moisturizing",
   nodenames = {"group:stucco_damp"},
   neighbors = {"nc_terrain:water_source"},
   interval = 2.5,
-  chance = 5,
+  chance = 1,
   action = function(pos)
   local noden = minetest.get_node(pos).name
     if(noden == thismod ..":stucco_".. nc_stuccol.curing.stages[5] .. "_granite") then
@@ -30,8 +30,8 @@ minetest.register_abm({
   label = "Dry Stucco Dessication",
   nodenames = {"group:stucco_damp"},
   neighbors = {"air"},
-  interval = 4.5,
-  chance = 5,
+  interval = 24,
+  chance = 4,
   action = function(pos)
   local noden = minetest.get_node(pos).name
   if(waterchk(pos)==false)then
@@ -55,8 +55,8 @@ end
 minetest.register_abm({
   label = "Worked Clay Drying",
   nodenames = {"group:workable"},
-  interval = 20.5,
-  chance = 0.5,
+  interval = 41,
+  chance = 5,
   action = function(pos)
   local noden = minetest.get_node(pos).name
   minetest.set_node(pos,{name = noden.."_dry"})

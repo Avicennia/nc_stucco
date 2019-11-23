@@ -1,6 +1,8 @@
 local modname = "nc_stucco:"
-local daddymod = "nc_tree:"
+local parentmod = "nc_tree:"
+
 --  --  --  --  --  --  Stylus  --  --  --  --  --  --
+
 minetest.register_node("nc_stucco:stylus_rod",{
     description = "Stylus Rod",
     tiles = {"styltex.png"},
@@ -28,8 +30,8 @@ minetest.register_tool("nc_stucco:stylusW", {
         flammable = 2
     },
     tool_capabilities = nodecore.toolcaps({
-            uses = 0.25,
-            ["snappy"] = 2
+            uses = 0.06,
+            ["snappy"] = 4
         }),
     on_ignite = "nc_stonework:chip",
     sounds = nodecore.sounds("nc_terrain_stony")
@@ -42,7 +44,7 @@ nodecore.register_craft({
     toolgroups = {choppy = 1},
     nodes = {
         {
-            match = daddymod .. "stick",
+            match = parentmod .. "stick",
             replace = modname .. "stylus_rod"
         },
     }
@@ -151,6 +153,7 @@ nodecore.register_craft({
     action = "pummel",
     priority = 1,
     toolgroups = {snappy = 2},
+    duration = 0.1,
     nodes = {
         {
             match = nc_stuccol.theseNodes[n] .. "_clay",
@@ -163,6 +166,7 @@ nodecore.register_craft({
     action = "pummel",
     priority = 1,
     toolgroups = {snappy = 2},
+    duration = 0.1,
     nodes = {
         {
             match = nc_stuccol.theseNodes[n] .. "_granite",
@@ -172,26 +176,56 @@ nodecore.register_craft({
 })
 end
 nodecore.register_craft({
-    label = "disturb stucco clay",
+    label = "Crush Dry Clay",
     action = "pummel",
     priority = 1,
-    toolgroups = {crumbly = 1},
+    toolgroups = {thumpy = 2},
+    duration = 0.3,
     nodes = {
         {
-            match = modname .. "stucco_powdered_clay",
+            match = modname .. "stucco_dry_clay",
             replace = modname .. "stucco_powdered_clay"
         },
     }
 })
 nodecore.register_craft({
-    label = "disturb stucco granite",
+    label = "Crush Dry granite",
     action = "pummel",
     priority = 1,
-    toolgroups = {crumbly = 1},
+    toolgroups = {thumpy = 3},
+    duration = 1.5,
     nodes = {
         {
-            match = modname .. "stucco_powdered_granite",
-            replace = modname .. "stucco_powdered_granite"
+            match = modname .. "stucco_dry_granite",
+            replace = "nc_concrete:aggregate_dry"
         },
     }
 })
+for k,v in pairs(nc_stuccol.patterns)do
+nodecore.register_craft({
+    label = "Crush Clay Nodes to powder",
+    action = "pummel",
+    priority = 1,
+    toolgroups = {thumpy = 2},
+    duration = 0.3,
+    nodes = {
+        {
+            match = modname .. "stucco_"..v.."_clay_dry",
+            replace = modname .. "stucco_powdered_clay"
+        },
+    }
+})
+nodecore.register_craft({
+    label = "Crush Granite Nodes to powder",
+    action = "pummel",
+    priority = 1,
+    toolgroups = {thumpy = 3},
+    duration = 1.5,
+    nodes = {
+        {
+            match = modname .. "stucco_"..v.."_granite_dry",
+            replace = "nc_concrete:aggregate"
+        },
+    }
+})
+end
