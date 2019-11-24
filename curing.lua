@@ -55,8 +55,8 @@ end
 minetest.register_abm({
   label = "Worked Clay Drying",
   nodenames = {"group:workable"},
-  interval = 41,
-  chance = 5,
+  interval = 38,
+  chance = 4,
   action = function(pos)
   local noden = minetest.get_node(pos).name
   minetest.set_node(pos,{name = noden.."_dry"})
