@@ -14,7 +14,7 @@ rawset(_G, thismod, nc_stuccol)
 
 
 dofile(modpath .. "/curing.lua")
-    dofile(modpath .. "/crafting.lua")
-    dofile(modpath .. "/nodes.lua")
-    dofile(modpath .. "/particles.lua")
+dofile(modpath .. "/crafting.lua")
+dofile(modpath .. "/nodes.lua")
+dofile(modpath .. "/particles.lua")
 

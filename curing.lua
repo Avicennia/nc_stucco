@@ -18,8 +18,8 @@ minetest.register_abm({
   chance = 1,
   action = function(pos)
   local noden = minetest.get_node(pos).name
-    if(noden == thismod ..":stucco_".. nc_stuccol.curing.stages[5] .. "_granite") then
-      minetest.set_node(pos, {name = thismod ..":stucco_".. nc_stuccol.curing.stages[1] .. "_granite"})
+    if(noden == thismod ..":stucco_".. nc_stuccol.curing.stages[5] .. "_slate") then
+      minetest.set_node(pos, {name = thismod ..":stucco_".. nc_stuccol.curing.stages[1] .. "_slate"})
     elseif(noden == thismod ..":stucco_".. nc_stuccol.curing.stages[5] .. "_clay") then
       minetest.set_node(pos, {name = thismod ..":stucco_".. nc_stuccol.curing.stages[1] .. "_clay"})
     else return 
@@ -41,12 +41,12 @@ minetest.register_abm({
        minetest.set_node(pos, {name = thismod ..":stucco_".. nc_stuccol.curing.stages[3] .. "_clay"})
     elseif(noden == thismod ..":stucco_".. nc_stuccol.curing.stages[3] .. "_clay") then
       minetest.set_node(pos, {name = thismod ..":stucco_".. nc_stuccol.curing.stages[4] .. "_clay"})
-    elseif(noden == thismod ..":stucco_".. nc_stuccol.curing.stages[1] .. "_granite") then
-      minetest.set_node(pos, {name = thismod ..":stucco_".. nc_stuccol.curing.stages[2] .. "_granite"})
-    elseif(noden == thismod ..":stucco_".. nc_stuccol.curing.stages[2] .. "_granite") then
-     minetest.set_node(pos, {name = thismod ..":stucco_".. nc_stuccol.curing.stages[3] .. "_granite"})
-    elseif(noden == thismod ..":stucco_".. nc_stuccol.curing.stages[3] .. "_granite") then
-      minetest.set_node(pos, {name = thismod ..":stucco_".. nc_stuccol.curing.stages[4] .. "_granite"})
+    elseif(noden == thismod ..":stucco_".. nc_stuccol.curing.stages[1] .. "_slate") then
+      minetest.set_node(pos, {name = thismod ..":stucco_".. nc_stuccol.curing.stages[2] .. "_slate"})
+    elseif(noden == thismod ..":stucco_".. nc_stuccol.curing.stages[2] .. "_slate") then
+     minetest.set_node(pos, {name = thismod ..":stucco_".. nc_stuccol.curing.stages[3] .. "_slate"})
+    elseif(noden == thismod ..":stucco_".. nc_stuccol.curing.stages[3] .. "_slate") then
+      minetest.set_node(pos, {name = thismod ..":stucco_".. nc_stuccol.curing.stages[4] .. "_slate"})
     else return 
   end
 else return end
