@@ -9,7 +9,8 @@ for k,v in pairs(nc_stuccol.patterns)do
     description = "Wet Stucco with "..v.." Pattern",
     tiles = {"canvas1a.png^"..v..".png"},
     groups = {workable = 1, crumbly = 2, stucco_damp = 1},
-    on_punch = function(pos,node, puncher, itemstack)
+    on_punch = function(pos,node, puncher, pointed_thing, itemstack)
+      minetest.node_punch(pos, node, puncher, pointed_thing)
       if(puncher:get_wielded_item():get_name() == "nc_stucco:stylusW")then
       if(nc_stuccol.patterns[k+1])then
       minetest.set_node(pos, {name = "nc_stucco:stucco_".. nc_stuccol.patterns[k+1]  .."_clay"})
@@ -40,7 +41,8 @@ minetest.register_node("nc_stucco:stucco_"..v.."_slate",{
   description = "Wet Stucco with "..v.." Pattern",
   tiles = {"canvas2.png^"..v..".png^"..v..".png"},
   groups = {workable = 1, crumbly = 2},
-  on_punch = function(pos,node, puncher, itemstack)
+  on_punch = function(pos,node, puncher, pointed_thing, itemstack)
+    minetest.node_punch(pos, node, puncher, pointed_thing)
     if(puncher:get_wielded_item():get_name() == "nc_stucco:stylusW")then
     if(nc_stuccol.patterns[k+1])then
     minetest.set_node(pos, {name = "nc_stucco:stucco_".. nc_stuccol.patterns[k+1]  .."_slate"})
