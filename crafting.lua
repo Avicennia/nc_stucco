@@ -183,19 +183,7 @@ nodecore.register_craft({
         },
     }
 })
-nodecore.register_craft({
-    label = "Crush Dry slate",
-    action = "pummel",
-    priority = 1,
-    toolgroups = {thumpy = 3},
-    duration = 1.5,
-    nodes = {
-        {
-            match = modname .. "stucco_dry_slate",
-            replace = "nc_concrete:aggregate_dry"
-        },
-    }
-})
+
 for k,v in pairs(nc_stuccol.patterns)do
 nodecore.register_craft({
     label = "Crush Clay Nodes to powder",
