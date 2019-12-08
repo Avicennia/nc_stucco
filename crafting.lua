@@ -183,6 +183,19 @@ nodecore.register_craft({
         },
     }
 })
+nodecore.register_craft({
+    label = "Crush Dry Slate",
+    action = "pummel",
+    priority = 1,
+    toolgroups = {thumpy = 2},
+    duration = 0.3,
+    nodes = {
+        {
+            match = modname .. "stucco_dry_slate",
+            replace = modname .. "stucco_powdered_slate"
+        },
+    }
+})
 
 for k,v in pairs(nc_stuccol.patterns)do
 nodecore.register_craft({
