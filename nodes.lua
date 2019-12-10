@@ -12,7 +12,7 @@ local minetest, nodecore, pairs
 for k, v in pairs(nc_stuccol.patterns) do
 	minetest.register_node("nc_stucco:stucco_" .. v .. "_clay", {
 			description = "Wet Stucco with " .. v .. " Pattern",
-			tiles = {"canvas1a.png^" .. v .. ".png"},
+			tiles = {"nc_stucco_canvas_1a.png^nc_stucco_pattern_" .. v .. ".png"},
 			groups = {workable = 1, crumbly = 2, stucco_damp = 1},
 			on_punch = function(pos, node, puncher, pointed_thing)
 				minetest.node_punch(pos, node, puncher, pointed_thing)
@@ -37,14 +37,15 @@ for k, v in pairs(nc_stuccol.patterns) do
 		})
 	minetest.register_node("nc_stucco:stucco_" .. v .. "_clay_dry", {
 			description = "Dry Stucco with " .. v .. " Pattern",
-			tiles = {"canvas1b.png^" .. v .. ".png"},
+			tiles = {"nc_stucco_canvas_1b.png^nc_stucco_pattern_" .. v .. ".png"},
 			groups = {cracky = 2, stucco_clay_dry = 1},
 			sounds = nodecore.sounds("nc_stucco_hard")
 		})
 	-- Slate
 	minetest.register_node("nc_stucco:stucco_" .. v .. "_slate", {
 			description = "Wet Stucco with " .. v .. " Pattern",
-			tiles = {"canvas2.png^" .. v .. ".png^" .. v .. ".png"},
+			tiles = {"nc_stucco_canvas_2.png^nc_stucco_pattern_"
+			.. v .. ".png^nc_stucco_pattern_" .. v .. ".png"},
 			groups = {workable = 1, crumbly = 2},
 			on_punch = function(pos, node, puncher, pointed_thing)
 				minetest.node_punch(pos, node, puncher, pointed_thing)
@@ -69,7 +70,7 @@ for k, v in pairs(nc_stuccol.patterns) do
 		})
 	minetest.register_node("nc_stucco:stucco_" .. v .. "_slate_dry", {
 			description = "Dry Stucco with " .. v .. " Pattern",
-			tiles = {"canvas2.png^" .. v .. ".png"},
+			tiles = {"nc_stucco_canvas_2.png^nc_stucco_pattern_" .. v .. ".png"},
 			groups = {cracky = 2, stucco_slate_dry = 1},
 			sounds = nodecore.sounds("nc_stucco_hard")
 		})
@@ -78,13 +79,13 @@ end
 for _, v in pairs(nc_stuccol.curing.stages) do
 	minetest.register_node("nc_stucco:stucco_" .. v .. "_clay", {
 			description = v .. " Stucco",
-			tiles = {"canvas1a.png^" .. v .. ".png"},
+			tiles = {"nc_stucco_canvas_1a.png^nc_stucco_curing_" .. v .. ".png"},
 			groups = {crumbly = 2, stucco_damp = 1, falling_node = 1},
 			sounds = nodecore.sounds("nc_stucco_chulky")
 		})
 	minetest.register_node("nc_stucco:stucco_" .. v .. "_slate", {
 			description = v .. " Stucco",
-			tiles = {"canvas2.png^" .. v .. ".png"},
+			tiles = {"nc_stucco_canvas_2.png^nc_stucco_curing_" .. v .. ".png"},
 			groups = {crumbly = 2, stucco_damp = 1, falling_node = 1},
 			sounds = nodecore.sounds("nc_stucco_chulky")
 		})
@@ -92,14 +93,14 @@ end
 -- Crushed Nodes.
 minetest.register_node("nc_stucco:crushed_stucco_clay", {
 		description = "Crushed Stucco",
-		tiles = {"canvas1a.png^[mask:vermi.png"},
+		tiles = {"nc_stucco_canvas_1a.png^[mask:vermi.png"},
 		groups = {crumbly = 1, falling_node = 1},
 		sounds = nodecore.sounds("nc_stucco_hard")
 	})
 
 minetest.register_node("nc_stucco:crushed_stucco_slate", {
 		description = "Crushed Stucco",
-		tiles = {"canvas2.png^[mask:vermi.png"},
+		tiles = {"nc_stucco_canvas_2.png^[mask:vermi.png"},
 		groups = {crumbly = 1, falling_node = 1},
 		sounds = nodecore.sounds("nc_stucco_hard")
 	})
@@ -107,7 +108,7 @@ minetest.register_node("nc_stucco:crushed_stucco_slate", {
 for n=1, #nc_stuccol.posts, 1 do
 	minetest.register_node("nc_stucco:post_" .. n .. "_slate", {
 			description = "slate Stucco Post",
-			tiles = {"canvas2.png^postbordythin.png"},
+			tiles = {"nc_stucco_canvas_2.png^nc_stucco_post_bordythin.png"},
 			groups = {cracky = 3},
 			drawtype = "nodebox",
 			paramtype = "light",
@@ -127,7 +128,7 @@ for n=1, #nc_stuccol.posts, 1 do
 		})
 	minetest.register_node("nc_stucco:post_" .. n .. "_clay", {
 			description = "Clay Stucco Post",
-			tiles = {"canvas1a.png^postbordythin.png"},
+			tiles = {"nc_stucco_canvas_1a.png^nc_stucco_post_bordythin.png"},
 			groups = {cracky = 2},
 			drawtype = "nodebox",
 			paramtype = "light",

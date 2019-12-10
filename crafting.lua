@@ -10,7 +10,7 @@ local parentmod = "nc_tree:"
 
 minetest.register_node("nc_stucco:stylus_rod", {
 		description = "Stylus Rod",
-		tiles = {"styltex.png"},
+		tiles = {"nc_stucco_tool_styltex.png"},
 		groups = {crumbly = 1},
 		drawtype = "nodebox",
 		paramtype = "light",
@@ -25,7 +25,7 @@ minetest.register_node("nc_stucco:stylus_rod", {
 minetest.register_tool("nc_stucco:stylusW", {
 		description = "Stone-Tipped Stylus",
 		tool_wears_to = "nc_tree:stick",
-		inventory_image = "stylus.png",
+		inventory_image = "nc_stucco_tool_stylus.png",
 		groups = {
 			flammable = 2
 		},
