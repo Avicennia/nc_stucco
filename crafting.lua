@@ -4,24 +4,9 @@ local minetest, nodecore, pairs
 -- LUALOCALS > ---------------------------------------------------------
 
 local modname = "nc_stucco:"
-local parentmod = "nc_tree:"
 
 -- -- -- -- -- -- Stylus -- -- -- -- -- --
 
-minetest.register_node("nc_stucco:stylus_rod", {
-		description = "Stylus Rod",
-		tiles = {"nc_stucco_tool_styltex.png"},
-		groups = {crumbly = 1},
-		drawtype = "nodebox",
-		paramtype = "light",
-		node_box = {
-			type = "fixed",
-			fixed = {
-				{-0.0625, -0.5, -0.0625, 0.0625, -0.1875, 0.0625},
-				{-0.0625, -0.1875, -0.0625, 0, -0.125, 0.0625},
-			}
-		},
-	})
 minetest.register_tool("nc_stucco:stylusW", {
 		description = "Stone-Tipped Stylus",
 		tool_wears_to = "nc_tree:stick",
@@ -38,23 +23,11 @@ minetest.register_tool("nc_stucco:stylusW", {
 	})
 
 nodecore.register_craft({
-		label = "craft stylus rod",
-		action = "pummel",
-		priority = 1,
-		toolgroups = {choppy = 1},
-		nodes = {
-			{
-				match = parentmod .. "stick",
-				replace = modname .. "stylus_rod"
-			},
-		}
-	})
-nodecore.register_craft({
 		label = "Fit stylus nib",
 		normal = {y = 1},
 		nodes = {
 			{match = "nc_stonework:chip", replace = "air"},
-			{y = -1, match = modname .. "stylus_rod", replace = "air"},
+			{y = -1, match = "nc_tree:stick", replace = "air"},
 		},
 		items = {
 			{y = -1, name = modname .. "stylusW"}

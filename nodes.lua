@@ -1,6 +1,6 @@
 -- LUALOCALS < ---------------------------------------------------------
-local minetest, nodecore, pairs, tostring
-    = minetest, nodecore, pairs, tostring
+local ItemStack, minetest, nodecore, pairs, tostring
+    = ItemStack, minetest, nodecore, pairs, tostring
 -- LUALOCALS > ---------------------------------------------------------
 
 --
@@ -11,12 +11,20 @@ local minetest, nodecore, pairs, tostring
 local function lc(n) return tostring(n):lower():gsub("%W", "") end
 
 local function stylus_change(pos, player, idx, type)
-	if player:get_wielded_item():get_name() ~= "nc_stucco:stylusW" then return end
+	local wield = player:get_wielded_item()
+	if wield:get_name() ~= "nc_stucco:stylusW" then return end
 	if idx < 1 then idx = #nc_stuccol.patterns end
 	if idx > #nc_stuccol.patterns then idx = 1 end
 	minetest.set_node(pos, {name = "nc_stucco:stucco_"
 			.. lc(nc_stuccol.patterns[idx]) .. "_" .. type})
-	return nodecore.show_touchtip(player, nodecore.touchtip_node(pos))
+	nodecore.show_touchtip(player, nodecore.touchtip_node(pos))
+	wield:add_wear(65536 / 250)
+	if wield:get_count() == 0 then
+		minetest.sound_play("nc_api_toolbreak",
+			{object = player, gain = 0.5})
+		wield = ItemStack("nc_tree:stick")
+	end
+	player:set_wielded_item(wield)
 end
 
 --Clay
