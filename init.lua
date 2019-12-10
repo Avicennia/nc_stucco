@@ -1,24 +1,32 @@
 -- LUALOCALS < ---------------------------------------------------------
-local dofile, ipairs, minetest, rawset
-    = dofile, ipairs, minetest, rawset
+local dofile, minetest, rawset
+    = dofile, minetest, rawset
 -- LUALOCALS > ---------------------------------------------------------
 
 local thismod = minetest.get_current_modname()
 local modpath = minetest.get_modpath(thismod)
 
 nc_stuccol = {
-	curing = {stages = {"sodden", "moist", "damp", "dry", "powdered"}},
-	patterns = {"gkey", "beetle", "bindy", "crossy", "corinth", "hashy",
-		"icebox", "vermi", "bricky", "hexy", "brexy", "barry", "ridgey",
-		"lamby", "doric", "starry", "targey", "stakey", "panelly",
-		"slatty", "logos", "peeky", "mucky", "enol", "sn", "hatchy",
-		"bordythin", "bordythick", "foote"},
-	posts = {"thicc", "thin"},
-	theseNodes = {}
+	curing = {
+		stages = {"Sodden", "Moist", "Damp", "Dry", "Powdered"},
+		wetter = {
+			powdered = "sodden",
+			moist = "sodden",
+			damp = "sodden"
+		},
+		drier = {
+			sodden = "moist",
+			moist = "damp",
+			damp = "dry"
+		}
+	},
+	patterns = {"GKey", "Beetle", "Bindy", "Crossy", "Corinth", "Hashy",
+		"Icebox", "Vermi", "Bricky", "Hexy", "Brexy", "Barry", "Ridgey",
+		"Lamby", "Doric", "Starry", "Targey", "Stakey", "Panelly",
+		"Slatty", "Logos", "Peeky", "Mucky", "Enol", "SN", "Hatchy",
+		"Bordy-Thin", "Bordy-Thick", "Foote"},
+	posts = {"Thick", "Thin"},
 }
-for k, v in ipairs(nc_stuccol.patterns) do
-	nc_stuccol.theseNodes[k] = "nc_stucco:stucco_" .. v
-end
 rawset(_G, thismod, nc_stuccol)
 
 dofile(modpath .. "/curing.lua")

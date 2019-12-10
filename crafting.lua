@@ -99,168 +99,67 @@ nodecore.register_craft({
 		}
 	})
 
-nodecore.register_craft({
-		label = "nc_stucco;craft_inscrip_clay",
-		action = "pummel",
-		priority = 1,
-		toolgroups = {snappy = 2},
-		nodes = {
-			{
-				match = "nc_stucco:stucco_damp_clay" or "nc_stucco:stucco_moist_clay",
-				replace = "nc_stucco:stucco_gkey_clay"
-			},
-		}
-	})
-nodecore.register_craft({
-		label = "nc_stucco;craft_inscrip_clay2",
-		action = "pummel",
-		priority = 1,
-		toolgroups = {snappy = 2},
-		nodes = {
-			{
-				match = "nc_stucco:stucco_moist_clay",
-				replace = "nc_stucco:stucco_gkey_clay"
-			},
-		}
-	})
-nodecore.register_craft({
-		label = "nc_stucco;craft_inscrip_slate",
-		action = "pummel",
-		priority = 1,
-		toolgroups = {snappy = 2},
-		nodes = {
-			{
-				match = "nc_stucco:stucco_damp_slate" or "nc_stucco:stucco_moist_slate",
-				replace = "nc_stucco:stucco_gkey_slate"
-			},
-		}
-	})
-nodecore.register_craft({
-		label = "nc_stucco;craft_inscrip_slate2",
-		action = "pummel",
-		priority = 1,
-		toolgroups = {snappy = 2},
-		nodes = {
-			{
-				match = "nc_stucco:stucco_moist_slate",
-				replace = "nc_stucco:stucco_gkey_slate"
-			},
-		}
-	})
-for n=1, #nc_stuccol.theseNodes - 1, 1 do
-	nodecore.register_craft({
-			label = "nc_stucco;craft_" .. nc_stuccol.patterns[n] .. "_clay",
-			action = "pummel",
-			priority = 1,
-			toolgroups = {snappy = 2},
-			duration = 0.1,
-			nodes = {
-				{
-					match = nc_stuccol.theseNodes[n] .. "_clay",
-					replace = nc_stuccol.theseNodes[n + 1] .. "_clay" or nc_stuccol.theseNodes[1] .. "_clay"
-				},
-			}
-		})
-	nodecore.register_craft({
-			label = "nc_stucco;craft_" .. nc_stuccol.patterns[n] .. "_slate",
-			action = "pummel",
-			priority = 1,
-			toolgroups = {snappy = 2},
-			duration = 0.1,
-			nodes = {
-				{
-					match = nc_stuccol.theseNodes[n] .. "_slate",
-					replace = nc_stuccol.theseNodes[n + 1] .. "_slate" or nc_stuccol.theseNodes[1] .. "_slate"
-				},
-			}
-		})
-end
-nodecore.register_craft({
-		label = "Crush Dry Clay",
-		action = "pummel",
-		priority = 1,
-		toolgroups = {thumpy = 2},
-		duration = 0.3,
-		nodes = {
-			{
-				match = modname .. "stucco_dry_clay",
-				replace = modname .. "stucco_powdered_clay"
-			},
-		}
-	})
-nodecore.register_craft({
-		label = "Crush Dry Slate",
-		action = "pummel",
-		priority = 1,
-		toolgroups = {thumpy = 2},
-		duration = 0.3,
-		nodes = {
-			{
-				match = modname .. "stucco_dry_slate",
-				replace = modname .. "stucco_powdered_slate"
-			},
-		}
-	})
+for _, material in pairs({"clay", "slate"}) do
 
-for _, v in pairs(nc_stuccol.patterns) do
+	for _, stage in pairs({"moist", "damp"}) do
+		nodecore.register_craft({
+				label = "stucco inscribe " .. stage .. " " .. material,
+				action = "pummel",
+				priority = 1,
+				toolgroups = {snappy = 2},
+				nodes = {
+					{
+						match = "nc_stucco:stucco_" .. stage .. "_" .. material,
+						replace = "nc_stucco:stucco_gkey_" .. material
+					},
+				}
+			})
+	end
+
 	nodecore.register_craft({
-			label = "Crush Clay Nodes to powder",
+			label = "crush dry " .. material,
 			action = "pummel",
 			priority = 1,
 			toolgroups = {thumpy = 2},
 			duration = 0.3,
 			nodes = {
 				{
-					match = modname .. "stucco_" .. v .. "_clay_dry",
-					replace = modname .. "stucco_powdered_clay"
+					match = modname .. "stucco_dry_" .. material,
+					replace = modname .. "stucco_powdered_" .. material
 				},
 			}
 		})
+	for _, v in pairs(nc_stuccol.patterns) do
+		nodecore.register_craft({
+				label = "crush dry " .. material,
+				action = "pummel",
+				priority = 1,
+				toolgroups = {thumpy = 2},
+				duration = 0.3,
+				nodes = {
+					{
+						match = modname .. "stucco_" .. v .. "_" .. material .. "_dry",
+						replace = modname .. "stucco_powdered_" .. material
+					},
+				}
+			})
+	end
+
 	nodecore.register_craft({
-			label = "Crush slate Nodes to powder",
+			label = "chop posts " .. material,
 			action = "pummel",
 			priority = 1,
-			toolgroups = {thumpy = 3},
+			toolgroups = {choppy = 2},
 			duration = 1.5,
 			nodes = {
 				{
-					match = modname .. "stucco_" .. v .. "_slate_dry",
-					replace = "nc_concrete:aggregate"
+					match = modname .. "stucco_damp_" .. material,
+					replace = "air"
 				},
-			}
+			},
+			items = {
+				{y = -1, name = modname .. "post_1_" .. material, count = 8, scatter = 6}
+			},
+			itemscatter = 6
 		})
 end
-nodecore.register_craft({
-		label = "Chop Posts Clay",
-		action = "pummel",
-		priority = 1,
-		toolgroups = {choppy = 2},
-		duration = 1.5,
-		nodes = {
-			{
-				match = modname .. "stucco_damp_clay",
-				replace = "air"
-			},
-		},
-		items = {
-			{y = -1, name = modname .. "post_1_clay", count = 8, scatter = 6}
-		},
-		itemscatter = 6
-	})
-nodecore.register_craft({
-		label = "Chop Posts Slate",
-		action = "pummel",
-		priority = 1,
-		toolgroups = {choppy = 3},
-		duration = 1.5,
-		nodes = {
-			{
-				match = modname .. "stucco_damp_slate",
-				replace = "air"
-			},
-		},
-		items = {
-			{y = -1, name = modname .. "post_1_slate", count = 8, scatter = 6}
-		},
-		itemscatter = 6
-	})

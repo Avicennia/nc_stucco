@@ -1,8 +1,3 @@
--- LUALOCALS < ---------------------------------------------------------
-local minetest
-    = minetest
--- LUALOCALS > ---------------------------------------------------------
-
 -- DEAD CODE...??
 --[[
 function ps_insc_clay(pos)
