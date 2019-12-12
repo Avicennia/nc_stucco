@@ -99,22 +99,23 @@ end
 -- Crushed Nodes.
 minetest.register_node("nc_stucco:crushed_stucco_clay", {
 		description = "Crushed Clay Stucco",
-		tiles = {"nc_stucco_canvas_1a.png^[mask:vermi.png"},
+		tiles = {"nc_stucco_canvas_1a.png^[mask:nc_stucco_pattern_vermi.png"},
 		groups = {crumbly = 1, falling_node = 1},
 		sounds = nodecore.sounds("nc_stucco_hard")
 	})
 
 minetest.register_node("nc_stucco:crushed_stucco_slate", {
 		description = "Crushed Slate Stucco",
-		tiles = {"nc_stucco_canvas_2.png^[mask:vermi.png"},
+		tiles = {"nc_stucco_canvas_2.png^[mask:nc_stucco_pattern_vermi.png"},
 		groups = {crumbly = 1, falling_node = 1},
 		sounds = nodecore.sounds("nc_stucco_hard")
 	})
 -- Post Nodes.
 for n=1, #nc_stuccol.posts, 1 do
 	minetest.register_node("nc_stucco:post_" .. lc(n) .. "_slate", {
-			description = "Slate Stucco Post with " .. n .. " Border",
-			tiles = {"nc_stucco_canvas_2.png^nc_stucco_post_bordy" .. lc(n) .. ".png"},
+			description = "Slate Stucco Post with " .. lc(nc_stuccol.posts[n]) .. " Border",
+			tiles = {"nc_stucco_canvas_2.png^nc_stucco_post_bordy"
+			.. lc(nc_stuccol.posts[n]) .. ".png"},
 			groups = {cracky = 3},
 			drawtype = "nodebox",
 			paramtype = "light",
@@ -133,8 +134,9 @@ for n=1, #nc_stuccol.posts, 1 do
 			sounds = nodecore.sounds("nc_stucco_hard")
 		})
 	minetest.register_node("nc_stucco:post_" .. lc(n) .. "_clay", {
-			description = "Clay Stucco Post with " .. n .. " Border",
-			tiles = {"nc_stucco_canvas_1a.png^nc_stucco_post_bordy" .. lc(n) .. ".png"},
+			description = "Clay Stucco Post with " .. lc(nc_stuccol.posts[n]) .. " Border",
+			tiles = {"nc_stucco_canvas_1a.png^nc_stucco_post_bordy"
+			.. lc(lc(nc_stuccol.posts[n])) .. ".png"},
 			groups = {cracky = 2},
 			drawtype = "nodebox",
 			paramtype = "light",
