@@ -1,9 +1,9 @@
 -- LUALOCALS < ---------------------------------------------------------
-local minetest, nodecore, pairs
-    = minetest, nodecore, pairs
+local minetest, nodecore, pairs, string
+    = minetest, nodecore, pairs, string
+local string_lower
+    = string.lower
 -- LUALOCALS > ---------------------------------------------------------
-
-local modname = "nc_stucco:"
 
 -- -- -- -- -- -- Stylus -- -- -- -- -- --
 
@@ -30,7 +30,7 @@ nodecore.register_craft({
 			{y = -1, match = "nc_tree:stick", replace = "air"},
 		},
 		items = {
-			{y = -1, name = modname .. "stylusW"}
+			{y = -1, name = "nc_stucco:stylusW"}
 		}
 	})
 -- -- -- -- -- -- Stylus -- -- -- -- -- -- ^^
@@ -97,12 +97,13 @@ for _, material in pairs({"clay", "slate"}) do
 			duration = 0.3,
 			nodes = {
 				{
-					match = modname .. "stucco_dry_" .. material,
-					replace = modname .. "stucco_powdered_" .. material
+					match = "nc_stucco:stucco_dry_" .. material,
+					replace = "nc_stucco:stucco_powdered_" .. material
 				},
 			}
 		})
 	for _, v in pairs(nc_stuccol.patterns) do
+		local pat = string_lower(v)
 		nodecore.register_craft({
 				label = "crush dry " .. material,
 				action = "pummel",
@@ -111,8 +112,8 @@ for _, material in pairs({"clay", "slate"}) do
 				duration = 0.3,
 				nodes = {
 					{
-						match = modname .. "stucco_" .. v .. "_" .. material .. "_dry",
-						replace = modname .. "stucco_powdered_" .. material
+						match = "nc_stucco:stucco_" .. pat .. "_" .. material .. "_dry",
+						replace = "nc_stucco:stucco_powdered_" .. material
 					},
 				}
 			})
@@ -126,12 +127,12 @@ for _, material in pairs({"clay", "slate"}) do
 			duration = 1.5,
 			nodes = {
 				{
-					match = modname .. "stucco_damp_" .. material,
+					match = "nc_stucco:stucco_damp_" .. material,
 					replace = "air"
 				},
 			},
 			items = {
-				{y = -1, name = modname .. "post_1_" .. material, count = 8, scatter = 6}
+				{y = -1, name = "nc_stucco:post_1_" .. material, count = 8, scatter = 6}
 			},
 			itemscatter = 6
 		})

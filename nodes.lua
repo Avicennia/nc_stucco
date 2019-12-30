@@ -115,7 +115,7 @@ for n=1, #nc_stuccol.posts, 1 do
 	minetest.register_node("nc_stucco:post_" .. lc(n) .. "_slate", {
 			description = "Slate Stucco Post with " .. lc(nc_stuccol.posts[n]) .. " Border",
 			tiles = {"nc_stucco_canvas_2.png^nc_stucco_post_bordy"
-			.. lc(nc_stuccol.posts[n]) .. ".png"},
+				.. lc(nc_stuccol.posts[n]) .. ".png"},
 			groups = {cracky = 3},
 			drawtype = "nodebox",
 			paramtype = "light",
@@ -136,7 +136,7 @@ for n=1, #nc_stuccol.posts, 1 do
 	minetest.register_node("nc_stucco:post_" .. lc(n) .. "_clay", {
 			description = "Clay Stucco Post with " .. lc(nc_stuccol.posts[n]) .. " Border",
 			tiles = {"nc_stucco_canvas_1a.png^nc_stucco_post_bordy"
-			.. lc(lc(nc_stuccol.posts[n])) .. ".png"},
+				.. lc(lc(nc_stuccol.posts[n])) .. ".png"},
 			groups = {cracky = 2},
 			drawtype = "nodebox",
 			paramtype = "light",
