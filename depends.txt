@@ -1,1 +1,1 @@
-nc_fire,nc_terrain,nc_api,nc_api_craft
+nc_api_all
