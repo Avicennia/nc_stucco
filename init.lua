@@ -6,6 +6,7 @@ local dofile, minetest, rawset
 local thismod = minetest.get_current_modname()
 local modpath = minetest.get_modpath(thismod)
 parentmod = minetest.get_modpath("nc_concrete")
+tm = "nc_stucco:"
 
 nc_stuccol = {
 	curing = {
@@ -41,6 +42,9 @@ rawset(_G, thismod, nc_stuccol)
 
 
 dofile(modpath .. "/nodes.lua")
+dofile(modpath .. "/crafting.lua")
+dofile(modpath .. "/sculpt.lua")
+
 
 
 minetest.after(1, function()

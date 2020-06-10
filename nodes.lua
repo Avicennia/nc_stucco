@@ -93,29 +93,66 @@ for k,v in pairs(minetest.registered_nodes) do
     else end
 
 end
-nodecore.register_craft({
-    label = "crush dry concrete",
-    action = "pummel",
-    priority = 1,
-    toolgroups = {thumpy = 2},
-    duration = 0.3,
-    nodes = {
-        {
-            match = { groups = {nc_stucco_etched_hard_adobe = true}},
-            replace = "nc_concrete:mud"
-        },
-    }
+
+-- Sculpting Nodes
+minetest.register_node(tm.."sword", {
+	tiles = {"nc_terrain_stone.png"},
+    drawtype = "mesh",
+    mesh = "st_stord_corr.obj",
+	paramtype = "light",
+	
 })
-nodecore.register_craft({
-    label = "crush dry concrete",
-    action = "pummel",
-    priority = 1,
-    toolgroups = {thumpy = 2},
-    duration = 0.3,
-    nodes = {
-        {
-            match = { groups = {nc_stucco_etched_hard_coalstone = true}},
-            replace = "nc_concrete:render"
-        },
-    }
+
+minetest.register_node(tm.."bowl", {
+	tiles = {"nc_terrain_stone.png"},
+    drawtype = "mesh",
+    mesh = "st_bowl_inv_corr.obj",
+	paramtype = "light",
+	
 })
+
+minetest.register_node(tm.."post", {
+	tiles = {"nc_terrain_stone.png"},
+    drawtype = "mesh",
+    mesh = "st_post_corr.obj",
+	paramtype = "light",
+	
+})
+
+minetest.register_node(tm.."spost", {
+	tiles = {"table.png","table2.png","table2.png","table2.png","table2.png","table2.png"},
+    drawtype = "mesh",
+    mesh = "st_signpost_corr.obj",
+	paramtype = "light",
+	
+})
+
+minetest.register_node(tm.."pillar_end", {
+	tiles = {"nc_terrain_stone.png"},
+    drawtype = "mesh",
+    mesh = "st_pillar_base_corr.obj",
+	paramtype = "light",
+	
+})
+minetest.register_node(tm.."pillar_end_inv", {
+	tiles = {"nc_terrain_stone.png"},
+    drawtype = "mesh",
+    mesh = "st_pillar_base_inv_corr.obj",
+	paramtype = "light",
+	
+})
+minetest.register_node(tm.."pillar_mid", {
+	tiles = {"nc_terrain_stone.png"},
+    drawtype = "mesh",
+    mesh = "st_pillar_mid_corr.obj",
+	paramtype = "light",
+	
+})
+
+
+
+
+
+
+
+
