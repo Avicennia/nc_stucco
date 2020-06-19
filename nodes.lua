@@ -72,9 +72,15 @@ end
 
 for n = 1, #nc_stuccol.patterns, 1 do
     local v = nc_stuccol.patterns[n]
-    nodecore.register_concrete_pattern({description = lc(v)})
+    nodecore.register_concrete_pattern({name = lc(v), description = lc(v), pattern_tile = "nc_stucco_pattern_"..lc(v)..".png"})
+    
 end
-
+minetest.after(10, function() 
+for k, v in pairs(minetest.registered_nodes)do
+    
+    local n = string.find(k, "nc_concrete:") and minetest.chat_send_all(k) or "-----------------------------"
+end
+end)
 -- Curing Stage Nodes.
 for n = 1, #nc_stuccol.curing.stages, 1 do
     local v = nc_stuccol.curing.stages[n]
