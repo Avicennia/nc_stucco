@@ -101,64 +101,16 @@ for k,v in pairs(minetest.registered_nodes) do
 end
 
 -- Sculpting Nodes
-minetest.register_node(tm.."sword", {
+
+local meshies = {"st_stord_corr.obj", "st_bowl_inv_corr.obj", "st_post_corr.obj", "st_signpost_corr.obj",
+ "st_pillar_base_corr.obj", "st_pillar_base_inv_corr.obj", "st_pillar_mid_corr.obj", names = {"sword", "bowl","post","spost","pillar_end","pillar_end_inv", "pillar_mid"}}
+
+for n = 1, 7 do
+minetest.register_node(tm..meshies.names[n], {
 	tiles = {"nc_terrain_stone.png"},
     drawtype = "mesh",
-    mesh = "st_stord_corr.obj",
+    mesh = meshies[n],
 	paramtype = "light",
 	
 })
-
-minetest.register_node(tm.."bowl", {
-	tiles = {"nc_terrain_stone.png"},
-    drawtype = "mesh",
-    mesh = "st_bowl_inv_corr.obj",
-	paramtype = "light",
-	
-})
-
-minetest.register_node(tm.."post", {
-	tiles = {"nc_terrain_stone.png"},
-    drawtype = "mesh",
-    mesh = "st_post_corr.obj",
-	paramtype = "light",
-	
-})
-
-minetest.register_node(tm.."spost", {
-	tiles = {"table.png","table2.png","table2.png","table2.png","table2.png","table2.png"},
-    drawtype = "mesh",
-    mesh = "st_signpost_corr.obj",
-	paramtype = "light",
-	
-})
-
-minetest.register_node(tm.."pillar_end", {
-	tiles = {"nc_terrain_stone.png"},
-    drawtype = "mesh",
-    mesh = "st_pillar_base_corr.obj",
-	paramtype = "light",
-	
-})
-minetest.register_node(tm.."pillar_end_inv", {
-	tiles = {"nc_terrain_stone.png"},
-    drawtype = "mesh",
-    mesh = "st_pillar_base_inv_corr.obj",
-	paramtype = "light",
-	
-})
-minetest.register_node(tm.."pillar_mid", {
-	tiles = {"nc_terrain_stone.png"},
-    drawtype = "mesh",
-    mesh = "st_pillar_mid_corr.obj",
-	paramtype = "light",
-	
-})
-
-
-
-
-
-
-
-
+end
