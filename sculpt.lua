@@ -31,38 +31,53 @@ minetest.register_node(tm.."sculptier", {
 			{-0.0625, -0.4375, 0.125, 0.0625, -0.375, 0.25}, -- NodeBox25
 		}
 	},
+	on_construct = function(pos)
+		local meta = minetest.get_meta(pos)
+		meta:set_int("sculptindex", 1)
+	end,
 	on_punch = function(pos)
-		local ppos = {x = pos.x, y= pos.y, z = pos.z}
+		local ppos, meta = {x = pos.x, y= pos.y, z = pos.z}, minetest.get_meta(pos)
 		local node = minetest.get_node(pos)
 		local fa = nodecore.facedirs[node.param2].f
 		fa.n = nil
-		local entpos = vector.add(ppos, vector.divide(fa, 2.7))
-		entpos.y = entpos.y + 0.3
-		--minetest.chat_send_all(minetest.serialize())
-		minetest.add_entity(entpos, tm.."stylusent",nil)
+		local entpos = vector.add(ppos, vector.divide(fa, 2.52))
+		entpos.y = entpos.y + 0.335
+
+
+		local objs = minetest.get_objects_inside_radius(pos, 0.9)
+		for n = 1, #objs do
+		objs[1]:remove()
+		end
+
+		local num = meta:get_int("sculptindex") or 1
+		num = num > 0 and num < #nc_stuccol.meshies and num or 1
+		minetest.add_entity(entpos, tm..nc_stuccol.meshies.names[num],nil)
+		num = num > 0 and num < #nc_stuccol.meshies and num + 1 or 1
+		meta:set_int("sculptindex", num)
+		
 		
 	end
 })
-
-local roller2 =
+for n = 1, #nc_stuccol.meshies.names, 1 do
+local def =
 {
     hp_max = 1,
     physical = false,
     collide_with_objects = true,
     collisionbox = {0,0,0,0,0,0},
 	visual = "mesh",
-	mesh = "st_bowl_inv_corr.obj",
+	mesh = nc_stuccol.meshies[n],
     visual_size = {x = 2, y = 2},
-    textures = {"table2.png"},
+    textures = {"pseudo.png"},
 	is_visible = true,
-	--automatic_rotate = 3,
+	--automatic_rotate = 0.5,
     glow = 0,
 
     static_save = false,
 
     on_activate= function(self, dtime)
 	   local ent = self.object
-	   local pos = ent:get_pos()
-	   --ent:set_pos({x = pos.x + 0.5, y = pos.y + 0.25, z = pos.z})
+	   ent:set_yaw(190)
 	end}
-	minetest.register_entity(tm.."stylusent",roller2)
+	minetest.register_entity(tm..nc_stuccol.meshies.names[n],def)
+end

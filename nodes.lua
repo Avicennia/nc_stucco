@@ -102,14 +102,12 @@ end
 
 -- Sculpting Nodes
 
-local meshies = {"st_stord_corr.obj", "st_bowl_inv_corr.obj", "st_post_corr.obj", "st_signpost_corr.obj",
- "st_pillar_base_corr.obj", "st_pillar_base_inv_corr.obj", "st_pillar_mid_corr.obj", names = {"sword", "bowl","post","spost","pillar_end","pillar_end_inv", "pillar_mid"}}
 
 for n = 1, 7 do
-minetest.register_node(tm..meshies.names[n], {
+minetest.register_node(tm..nc_stuccol.meshies.names[n], {
 	tiles = {"nc_terrain_stone.png"},
     drawtype = "mesh",
-    mesh = meshies[n],
+    mesh = nc_stuccol.meshies[n],
 	paramtype = "light",
 	
 })
