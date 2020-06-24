@@ -50,9 +50,9 @@ minetest.register_node(tm.."sculptier", {
 		end
 
 		local num = meta:get_int("sculptindex") or 1
-		num = num > 0 and num < #nc_stuccol.meshies and num or 1
+		num = num > 0 and num <= #nc_stuccol.meshies and num or 1
 		minetest.add_entity(entpos, tm..nc_stuccol.meshies.names[num],nil)
-		num = num > 0 and num < #nc_stuccol.meshies and num + 1 or 1
+		num = num > 0 and num <= #nc_stuccol.meshies and num + 1 or 1
 		meta:set_int("sculptindex", num)
 		
 		
@@ -77,7 +77,8 @@ local def =
 
     on_activate= function(self, dtime)
 	   local ent = self.object
-	   ent:set_yaw(190)
+	   ent:set_yaw(4.716)
+
 	end}
 	minetest.register_entity(tm..nc_stuccol.meshies.names[n],def)
 end

@@ -103,7 +103,7 @@ end
 -- Sculpting Nodes
 
 
-for n = 1, 7 do
+for n = 1, #nc_stuccol.meshies do
 minetest.register_node(tm..nc_stuccol.meshies.names[n], {
 	tiles = {"nc_terrain_stone.png"},
     drawtype = "mesh",

@@ -32,3 +32,18 @@ nodecore.register_craft({
         },
     }
 })
+
+--Sculpting crafts
+nodecore.register_craft({
+    label = "dig up tacky material",
+    action = "pummel",
+    priority = 1,
+    toolgroups = {thumpy = 2},
+    duration = 0.3,
+    nodes = {
+        {
+            match = { groups = {pliant = true}},
+            replace = "nc_concrete:render"
+        },
+    }
+})

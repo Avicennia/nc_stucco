@@ -30,7 +30,7 @@ nc_stuccol = {
 	dep = {"Bordy-Thin", "Bordy-Thick"},
 	posts = {"Thick", "Thin"},
 	meshies = {"st_sword_corr.obj", "st_bowl_inv_corr.obj", "st_post_corr.obj", "st_signpost_corr.obj",
- "st_pillar_base_corr.obj", "st_pillar_base_inv_corr.obj", "st_pillar_mid_corr.obj", names = {"sword", "bowl","post","spost","pillar_end","pillar_end_inv", "pillar_mid"}}
+ "st_pillar_base_corr.obj", "st_pillar_base_inv_corr.obj", "st_pillar_mid_corr.obj","sarco_corr.obj","stone1_corr.obj", names = {"sword", "bowl","post","spost","pillar_end","pillar_end_inv", "pillar_mid", "sarco","stone1"}}
 
 }
 
