@@ -45,8 +45,12 @@ minetest.register_node(tm.."sculptier", {
 
 
 		local objs = minetest.get_objects_inside_radius(pos, 0.9)
+
+		local function nameparse(obj)
+			return obj and obj:get_entity_name() and string.find(obj:get_entity_name(), "stucco") and obj:remove() or false
+		end
 		for n = 1, #objs do
-		objs[1]:remove()
+			nameparse(objs[n])	
 		end
 
 		local num = meta:get_int("sculptindex") or 1
