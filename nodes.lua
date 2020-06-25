@@ -105,10 +105,11 @@ end
 
 for n = 1, #nc_stuccol.meshies do
 minetest.register_node(tm..nc_stuccol.meshies.names[n], {
-	tiles = {"nc_terrain_stone.png"},
+	tiles = {"nc_terrain_stone.png^[resize:8x8"},
     drawtype = "mesh",
     mesh = nc_stuccol.meshies[n],
-	paramtype = "light",
+    paramtype = "light",
+    paramtype2 = "facedir"
 	
 })
 end
