@@ -25,7 +25,7 @@ nc_stuccol = {
 	patterns = {"GKey", "Beetle", "Crossy", "Corinth", "Hexy", "Brexy",
 		"Lamby", "Doric", "Starry", "Targey", "Stakey", "Panelly",
 		"Slatty", "Logos", "Peeky", "Mucky", "Enol", "SN", "Hatchy",
-		"Foote"},
+		"Foote","Signy","Signy2", "Signy3"},
 	wca = {"Bindy", "Bricky", "Hashy","Icebox","Ridgey", "Vermi", "Barry"},
 	dep = {"Bordy-Thin", "Bordy-Thick"},
 	posts = {"Thick", "Thin"},
