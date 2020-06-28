@@ -84,13 +84,18 @@ local def =
 
     on_activate= function(self, dtime)
 	   local ent = self.object
-	   ent:set_yaw(4.716)
+	   local pos = ent:get_pos()
+	   local paramii = minetest.get_node(pos).param2
+	   --minetest.chat_send_all(minetest.get_node(pos).param2)
+	   if(paramii == 0 or paramii == 2)then
+	   ent:set_yaw(0)
+	   else ent:set_yaw(4.716) end
 	end,
 	on_step = function(self)
 		local pos = self.object:get_pos()
 		local objs = minetest.get_objects_inside_radius(pos, 5)
 
-		local function dependent_personality_disorder(objs)
+		local function dependent_entity_disorder(objs)
 		if objs then 
 			local indice;
 			for n = 1, #objs do
@@ -102,7 +107,7 @@ local def =
 		else end
 		return indice
 	end
-		return dependent_personality_disorder(objs) or resetsi(pos) and self.object:remove()
+		return dependent_entity_disorder(objs) or resetsi(pos) and self.object:remove()
 	end
 }
 	minetest.register_entity(tm..nc_stuccol.meshies.names[n],def)
