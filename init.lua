@@ -32,16 +32,17 @@ nc_stuccol = {
 	meshies = {"st_sword_corr.obj", "st_bowl_inv_corr.obj", "st_post_corr.obj", "st_signpost_corr.obj",
  "st_pillar_base_corr.obj", "st_pillar_base_inv_corr.obj", "st_pillar_mid_corr.obj","sarco_corr.obj","stone1_corr.obj","bcage.obj","bcage_closed_corr.obj", "urn_corr.obj", "urn_closed_corr.obj",
 names = {"sword", "bowl","post","spost","pillar_end","pillar_end_inv", "pillar_mid", "sarco","stone1","bcage","bcage_closed", "urn", "urn_closed"}
-}
-
-}
-
-
-
-nms = {
+},
+bench = "nc_stucco:sculptier",
+boss = {
 	mod = "nc_concrete",
-	na = {"sandstone", "adobe", "coalstone"}
+	concrete_mats = {"sandstone", "adobe", "coalstone","terrain_stone"},
+	textures = {}
 }
+}
+
+
+
 
 rawset(_G, thismod, nc_stuccol)
 
@@ -49,22 +50,6 @@ rawset(_G, thismod, nc_stuccol)
 dofile(modpath .. "/nodes.lua")
 dofile(modpath .. "/crafting.lua")
 dofile(modpath .. "/sculpt.lua")
+dofile(modpath .. "/curing.lua")
 
-
-
-minetest.after(1, function()
-for k,_ in pairs(minetest.registered_nodes) do
-	if(string.find(k,"nc_concrete:concrete_") and not string.find(k,"ply"))then
-		local ngroups = minetest.registered_nodes[k]["groups"]
-		if(string.find(k, "ad"))then
-		ngroups.nc_stucco_etched_hard_adobe = 1
-		minetest.override_item(k, {groups = ngroups})
-		elseif(string.find(k, "co"))then
-		ngroups.nc_stucco_etched_hard_coalstone = 1
-		minetest.override_item(k, {groups = ngroups})
-		else end
-	else end
-
-end
-end)
 

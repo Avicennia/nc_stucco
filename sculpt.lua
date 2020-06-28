@@ -1,5 +1,8 @@
 local tm = "nc_stucco:"
 
+local function resetsi(pos)
+	return pos and not minetest.get_meta(pos):set_int("sculptindex", 0) and true
+end
 
 minetest.register_node(tm.."sculptier", {
 	tiles = {"canvas3.png","canvas3.png","canvas3.png","canvas3.png","canvas3.png","canvas3.png"},
@@ -33,7 +36,7 @@ minetest.register_node(tm.."sculptier", {
 	},
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
-		meta:set_int("sculptindex", 1)
+		meta:set_int("sculptindex", 0)
 	end,
 	on_punch = function(pos)
 		local ppos, meta = {x = pos.x, y= pos.y, z = pos.z}, minetest.get_meta(pos)
@@ -53,15 +56,15 @@ minetest.register_node(tm.."sculptier", {
 			nameparse(objs[n])	
 		end
 
-		local num = meta:get_int("sculptindex") or 1
-		num = num > 0 and num <= #nc_stuccol.meshies and num or 1
+		local num = meta:get_int("sculptindex") + 1
+		num = num > 0 and num <= #nc_stuccol.meshies.names and num or 1
 		minetest.add_entity(entpos, tm..nc_stuccol.meshies.names[num],nil)
-		num = num > 0 and num <= #nc_stuccol.meshies and num + 1 or 1
 		meta:set_int("sculptindex", num)
-		
+		--minetest.chat_send_all("|||"..num.."|||")
 		
 	end
 })
+
 for n = 1, #nc_stuccol.meshies.names, 1 do
 local def =
 {
@@ -82,7 +85,55 @@ local def =
     on_activate= function(self, dtime)
 	   local ent = self.object
 	   ent:set_yaw(4.716)
+	end,
+	on_step = function(self)
+		local pos = self.object:get_pos()
+		local objs = minetest.get_objects_inside_radius(pos, 5)
 
-	end}
+		local function dependent_personality_disorder(objs)
+		if objs then 
+			local indice;
+			for n = 1, #objs do
+				if objs[n] and objs[n]:is_player() then
+					indice = true
+				else end
+			end
+			return indice
+		else end
+		return indice
+	end
+		return dependent_personality_disorder(objs) or resetsi(pos) and self.object:remove()
+	end
+}
 	minetest.register_entity(tm..nc_stuccol.meshies.names[n],def)
+
 end
+
+-- Sculpting
+
+nodecore.register_craft({
+    label = "sculpt" ,
+    action = "pummel",
+    priority = 1,
+    toolgroups = {scratchy = 2},
+    nodes = {
+        {
+            match = {groups = {sculpt = true}},
+        },
+    },
+	after = function(pos)
+		local under = {x = pos.x, y = pos.y - 1, z = pos.z}
+		if(minetest.get_node(under).name == nc_stuccol.bench)then
+		local node = minetest.get_node(pos)
+		local choice = minetest.get_meta(under):get_int("sculptindex")
+		choice = choice ~= 0 and choice or 1
+		minetest.remove_node(pos)
+		local function concrete_type(node)
+			local name = node and string.find(node.name, "blank_ply") and node.name
+			
+			return name and string.find(name, "terrain_stone") and 4 or string.find(name, "adobe") and 2 or string.find(name, "coalstone") and 3 or string.find(name, "sandstone") and 1 or nil
+		end
+		minetest.set_node(pos, {name = tm..nc_stuccol.boss.concrete_mats[concrete_type(node)].."_"..nc_stuccol.meshies.names[choice]})
+	else end
+    end
+})

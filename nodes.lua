@@ -5,6 +5,14 @@ local ItemStack, minetest, nodecore, pairs, tostring
 
 --
 --
+for k, v in pairs(minetest.registered_nodes)do
+    local n = string.find(k, "blank_ply") and v.groups
+    if n then
+    minetest.after(5, function() minetest.chat_send_all(minetest.serialize(n)) end)
+    n.sculpt = 1
+    minetest.override_item(k, {groups = n})
+    else end
+end
 
 -- Wet and Dry versions of patterned nodes.
 
@@ -75,12 +83,7 @@ for n = 1, #nc_stuccol.patterns, 1 do
     nodecore.register_concrete_pattern({name = lc(v), description = lc(v), pattern_tile = "nc_stucco_pattern_"..lc(v)..".png"})
     
 end
-minetest.after(10, function() 
-for k, v in pairs(minetest.registered_nodes)do
-    
-    local n = string.find(k, "nc_concrete:") and minetest.chat_send_all(k) or "-----------------------------"
-end
-end)
+
 -- Curing Stage Nodes.
 for n = 1, #nc_stuccol.curing.stages, 1 do
     local v = nc_stuccol.curing.stages[n]
@@ -104,12 +107,43 @@ end
 
 
 for n = 1, #nc_stuccol.meshies do
-minetest.register_node(tm..nc_stuccol.meshies.names[n], {
-	tiles = {"nc_terrain_stone.png^[resize:8x8"},
+minetest.register_node(tm.."terrain_stone_"..nc_stuccol.meshies.names[n], {
+	tiles = {"nc_terrain_stone.png^[resize:16x16"},
     drawtype = "mesh",
     mesh = nc_stuccol.meshies[n],
     paramtype = "light",
-    paramtype2 = "facedir"
+    paramtype2 = "facedir",
+    groups = {cracky = 2, sculpted = 1}
+	
+})
+
+minetest.register_node(tm.."sandstone_"..nc_stuccol.meshies.names[n], {
+	tiles = {"nc_concrete_sandstone.png^[resize:16x16"},
+    drawtype = "mesh",
+    mesh = nc_stuccol.meshies[n],
+    paramtype = "light",
+    paramtype2 = "facedir",
+    groups = {cracky = 2, sculpted = 1}
+	
+})
+
+minetest.register_node(tm.."adobe_"..nc_stuccol.meshies.names[n], {
+	tiles = {"nc_concrete_adobe.png^[resize:16x16"},
+    drawtype = "mesh",
+    mesh = nc_stuccol.meshies[n],
+    paramtype = "light",
+    paramtype2 = "facedir",
+    groups = {cracky = 2, sculpted = 1}
+	
+})
+
+minetest.register_node(tm.."coalstone_"..nc_stuccol.meshies.names[n], {
+	tiles = {"nc_terrain_stone.png^[colorize:#000000:160^[resize:16x16"},
+    drawtype = "mesh",
+    mesh = nc_stuccol.meshies[n],
+    paramtype = "light",
+    paramtype2 = "facedir",
+    groups = {cracky = 2, sculpted = 1}
 	
 })
 end
